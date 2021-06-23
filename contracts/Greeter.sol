@@ -1,16 +1,14 @@
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.4.0 <=0.8.6;
 
-contract Greeter {
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+
+contract Greeter is Ownable {
     string private _greeting = "Hello, World!";
     address private _owner;
 
-    constructor() public {
+    constructor() {
         _owner = msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == _owner, "Ownable: caller is not the owner");
-        _;
     }
 
     function greet() external view returns (string memory) {
@@ -21,7 +19,7 @@ contract Greeter {
         _greeting = greeting;
     }
 
-    function owner() public view returns (address) {
+    function getOwner() public view returns (address) {
         return _owner;
     }
 }
